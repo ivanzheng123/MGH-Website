@@ -1,0 +1,78 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "ui": "stream",
+    "tasks": {
+        "dependencies": {
+            "inputs": [
+                "./env/*"
+            ],
+            "outputs": []
+        },
+        "lint": {
+            "dependsOn": [
+                "^dependencies",
+                "^build:dev"
+            ]
+        },
+        "lint:fix": {
+            "dependsOn": [
+                "^dependencies"
+            ]
+        },
+        "build:dev": {
+            "dependsOn": [
+                "^dependencies",
+                "^build:dev"
+            ]
+        },
+        "dev": {
+            "dependsOn": [
+                "^build:dev"
+            ],
+            "cache": false,
+            "persistent": true
+        },
+        "deploy": {
+            "dependsOn": [
+                "^build"
+            ],
+            "cache": false,
+            "persistent": true
+        },
+        "build": {
+            "inputs": [
+                "./env/*"
+            ],
+            "env": [
+                "BACKEND_PORT",
+                "FRONTEND_PORT",
+                "BACKEND_SOURCE",
+                "BACKEND_URL",
+                "PORT",
+                "POSTGRES_PASSWORD",
+                "POSTGRES_DB",
+                "POSTGRES_PORT",
+                "POSTGRES_HOST",
+                "POSTGRES_URL"
+            ],
+            "dependsOn": [
+                "^dependencies"
+            ],
+            "outputs": [
+                "build/**"
+            ]
+        },
+        "docker:build": {
+            "dependsOn": [
+                "lint"
+            ],
+            "cache": false
+        },
+        "docker:upload": {
+            "dependsOn": [
+                "docker:build"
+            ],
+            "cache": false
+        }
+    }
+}

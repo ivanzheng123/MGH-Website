@@ -1,0 +1,44 @@
+{
+    "private": true,
+    "name": "database",
+    "version": "1.0.1",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "browser": "./src/index.ts",
+    "scripts": {
+        "lint": "dotenv -e ${PROJECT_CWD}/.env -- yarn shared:prettier && dotenv -e ${PROJECT_CWD}/.env -- prisma validate && dotenv -e ${PROJECT_CWD}/.env -- yarn shared:eslint && dotenv -e ${PROJECT_CWD}/.env -- yarn shared:tslint",
+        "lint:fix": "dotenv -e ${PROJECT_CWD}/.env -- yarn shared:prettier:fix && dotenv -e ${PROJECT_CWD}/.env -- prisma format && dotenv -e ${PROJECT_CWD}/.env -- yarn shared:eslint:fix && dotenv -e ${PROJECT_CWD}/.env -- yarn shared:tslint",
+        "generate": "pnpify prisma generate --schema=${INIT_CWD}/prisma/schema.prisma && yarn run generate:nixos",
+        "migrate:dev": "dotenv -e ${PROJECT_CWD}/.env -- prisma migrate dev --skip-generate",
+        "migrate:dev:wpi": "dotenv -e ${PROJECT_CWD}/.env.wpi -- prisma migrate dev --skip-generate",
+        "migrate:dev:prod": "dotenv -e ${PROJECT_CWD}/.env.prod -- prisma migrate dev --skip-generate",
+        "migrate:reset": "dotenv -e ${PROJECT_CWD}/.env -- prisma migrate reset --skip-generate",
+        "migrate:reset:wpi": "dotenv -e ${PROJECT_CWD}/.env.wpi -- prisma migrate reset --skip-generate",
+        "migrate:reset:prod": "dotenv -e ${PROJECT_CWD}/.env.prod -- prisma migrate reset --skip-generate",
+        "migrate:resolve": "dotenv -e ${PROJECT_CWD}/.env -- prisma migrate resolve",
+        "migrate:resolve:wpi": "dotenv -e ${PROJECT_CWD}/.env.wpi -- prisma migrate resolve",
+        "migrate:resolve:prod": "dotenv -e ${PROJECT_CWD}/.env.prod -- prisma migrate resolve",
+        "push": "dotenv -e ${PROJECT_CWD}/.env pnpify prisma db push && yarn run generate:nixos",
+        "push:wpi": "dotenv -e ${PROJECT_CWD}/.env.wpi pnpify prisma db push",
+        "push:prod": "dotenv -e ${PROJECT_CWD}/.env.prod pnpify prisma db push",
+        "studio": "dotenv -e ${PROJECT_CWD}/.env prisma studio",
+        "studio:wpi": "dotenv -e ${PROJECT_CWD}/.env.wpi prisma studio",
+        "studio:prod": "dotenv -e ${PROJECT_CWD}/.env.prod prisma studio",
+        "generate:nixos": "symlink .prisma/client/query-engine .prisma/client/query-engine-linux-nixos"
+    },
+    "devDependencies": {
+        "@yarnpkg/pnpify": "^4.0.0-rc.45",
+        "eslint": "*",
+        "eslint-config-custom": "*",
+        "prettier": "*",
+        "prettier-config-custom": "*",
+        "prisma": "6.5.0",
+        "symlink-cli": "1.0.0",
+        "ts-config-custom": "*"
+    },
+    "dependencies": {
+        "@prisma/client": "6.5.0",
+        "dotenv": "*",
+        "dotenv-cli": "*"
+    }
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Mass General Brigham | Integrated Health Care System</title>
+        <link href="/images/favicon2.ico" rel="icon"/>
+        <base href="/"/>
+    </head>
+    <body>
+        <noscript>This website requires Javascript to be enabled in your browser.</noscript>
+        <div id="root"></div>
+        <script src="/src/main.tsx" type="module"></script>
+        <script>
+            /* Browsers supported: chrome 135+ */
+            const browserInfo = navigator.userAgent.toLowerCase();
+            const index = browserInfo.indexOf("chrome");
+            const version = parseInt(browserInfo.substring(index + 7)); //Assumes chrome
+            const supported = index !== -1 && version >= 135;
+            if (supported) {
+                console.log("Browser is Supported (Chrome 135+)");
+            } else {
+                alert("Your Browser is Not Supported!\n(Only Chrome 135+ is Supported)");
+                console.log("Browser is not Supported (Need: Chrome 135+)");
+            }
+        </script>
+    </body>
+</html>

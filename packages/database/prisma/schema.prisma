@@ -1,0 +1,197 @@
+generator client {
+  provider   = "prisma-client-js"
+  output     = "../.prisma/client"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model Pathfinding {
+  id        Int     @id @default(autoincrement())
+  latitude  Float
+  longitude Float
+  neighbors Int[]
+  floor     Int
+  name      String?
+}
+
+model AlgorithmSetting {
+  id                 Int    @id @default(1)
+  preferredAlgorithm String @default("A*")
+}
+
+model AlgoTimes {
+  id            Int    @id @default(autoincrement())
+  algorithm     String
+  executionTime Int
+}
+
+model Employee {
+  id          Int     @id @default(autoincrement())
+  uuid        String? @unique
+  userName    String  @unique
+  firstName   String
+  lastName    String
+  email       String  @unique
+  phoneNumber String  @unique
+  password    String
+  position    String
+  department  String?
+
+  requestedServiceRequests ServiceRequest[] @relation("RequestedBy")
+  assignedServiceRequests  ServiceRequest[] @relation("AssignedTo")
+  ForumReply               ForumReply[]
+  ForumPost                ForumPost[]
+}
+
+model ServiceRequest {
+  id             Int         @id @default(autoincrement())
+  requester_name String
+  location       String?
+  request_time   DateTime
+  status         String
+  note           String
+  is_resolved    Boolean
+  type           RequestType
+  completed_time DateTime?
+  hospital       String
+  urgency_level  String
+
+  requestedById Int? // FK to Employee (requester)
+  assignedToId  Int? // FK to Employee (assignee)
+
+  requestedBy Employee? @relation("RequestedBy", fields: [requestedById], references: [id])
+  assignedTo  Employee? @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  maintenanceRequest    MaintenanceRequest?
+  foodServiceRequest    FoodServiceRequest?
+  deviceRequest         DeviceRequest?
+  languageRequest       LanguageRequest?
+  audiovisualRequest    AudioVisualRequest?
+  transportationRequest TransportationRequest?
+}
+
+model TransportationRequest {
+  id               Int            @id @default(autoincrement())
+  destination      String
+  vehicle          String
+  serviceRequestId Int            @unique
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+model AudioVisualRequest {
+  id                  Int            @id @default(autoincrement())
+  AudioOrVisualNeeded String
+  serviceRequestId    Int            @unique
+  serviceRequest      ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+model MaintenanceRequest {
+  id            Int    @id @default(autoincrement())
+  facility      String
+  typeOfRequest String
+
+  serviceRequestId Int            @unique
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+model DeviceRequest {
+  id            Int    @id @default(autoincrement())
+  device_needed String
+
+  serviceRequestId Int            @unique
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+model FoodServiceRequest {
+  id               Int            @id @default(autoincrement())
+  patientName      String
+  meal             String
+  drink            String
+  allergies        String
+  serviceRequestId Int            @unique
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+enum RequestType {
+  MaintenanceRequest
+  LanguageRequest
+  DeviceRequest
+  FoodServiceRequest
+  AudioVisualRequest
+  TransportationRequest
+}
+
+model Hospital {
+  id         Int        @id @default(autoincrement())
+  name       String
+  address    String
+  identifier String     @unique
+  buildings  Building[]
+}
+
+model Building {
+  id          Int          @id @default(autoincrement())
+  name        String
+  hospitalId  Int
+  hospital    Hospital     @relation(fields: [hospitalId], references: [id])
+  departments Department[]
+  floorPlans  FloorPlan[]
+}
+
+model Department {
+  id         Int      @id @default(autoincrement())
+  name       String
+  floor      Int
+  buildingId Int
+  building   Building @relation(fields: [buildingId], references: [id])
+}
+
+model FloorPlan {
+  id         Int      @id @default(autoincrement())
+  floor      Int
+  imageUrl   String
+  buildingId Int
+  building   Building @relation(fields: [buildingId], references: [id])
+}
+
+model LanguageRequest {
+  id               Int            @id @default(autoincrement())
+  serviceRequestId Int            @unique
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  language         String
+  age              Int
+}
+
+model CalendarEvent {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  title       String
+  description String
+  /**
+   * attendies?
+   */
+}
+
+model ForumReply {
+  id           Int       @id @default(autoincrement())
+  postId       Int
+  date         DateTime
+  originalPost ForumPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId     Int
+  writtenBy    Employee  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  content      String
+}
+
+model ForumPost {
+  id        Int          @id @default(autoincrement())
+  title     String
+  authorId  Int
+  writtenBy Employee     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  date      DateTime
+  content   String
+  replies   ForumReply[]
+}
