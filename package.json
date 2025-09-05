@@ -1,0 +1,63 @@
+{
+    "private": true,
+    "name": "softeng-startercode-d25",
+    "version": "1.0.1",
+    "scripts": {
+        "dev": "dotenv -e .env -- turbo run dev",
+        "dev:wpi": "dotenv -e .env.wpi -- turbo run dev",
+        "dev:prod": "dotenv -e .env.prod -- turbo run dev",
+        "docker": "dotenv -e .env -- docker-compose -f ./docker/docker-compose.yml up --build",
+        "fix": "yarn cache clean && yarn install",
+        "test": "yarn run vitest --ui --open=false",
+        "lint": "turbo run lint",
+        "lint:fix": "turbo run lint:fix",
+        "generate_sdk": "yarn install && yarn dlx @yarnpkg/sdks base",
+        "build": "turbo run build",
+        "setup": "bash ./scripts/setup.sh",
+        "deploy": "bash ./scripts/deploy.sh",
+        "prepare": "husky",
+        "shadcn": "bash ./scripts/shadcn.sh"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.13",
+        "@vitest/ui": "^3.0.9",
+        "@yarnpkg/pnpify": "^4.1.4",
+        "eslint": "^9.23.0",
+        "eslint-config-custom": "workspace:*",
+        "husky": "^9.1.7",
+        "prettier": "^3.5.3",
+        "prettier-config-custom": "workspace:*",
+        "prisma": "^6.6.0",
+        "ts-config-custom": "workspace:*",
+        "turbo": "*",
+        "typescript": "^5.8.2",
+        "vitest": "^3.0.9"
+    },
+    "dependencies": {
+        "@radix-ui/react-hover-card": "^1.1.11",
+        "@radix-ui/react-select": "^2.1.7",
+        "common": "workspace:*",
+        "dotenv": "^16.4.7",
+        "dotenv-cli": "^7.4.4",
+        "prisma": "^6.6.0",
+        "react-router": "^7.5.3",
+        "react-router-dom": "^7.5.0",
+        "recharts": "^2.15.3"
+    },
+    "resolutions": {
+        "dotenv": "^16.4.7",
+        "dotenv-cli": "^7.4.4",
+        "@types/node": "^22.13.13",
+        "husky": "^9.1.7",
+        "prettier": "^3.5.3",
+        "typescript": "^5.8.2",
+        "eslint": "^9.23.0",
+        "vitest": "^3.0.9"
+    },
+    "workspaces": [
+        "apps/*",
+        "configs/*",
+        "packages/*"
+    ],
+    "packageManager": "yarn@4.7.0+sha512.5a0afa1d4c1d844b3447ee3319633797bcd6385d9a44be07993ae52ff4facabccafb4af5dcd1c2f9a94ac113e5e9ff56f6130431905884414229e284e37bb7c9"
+}

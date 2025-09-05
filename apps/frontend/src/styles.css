@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+/*  ---break---  */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    background-color: #ffffff;
+    font-size: 18px;
+    line-height: 1.4;
+    interpolate-size: allow-keywords;
+    font-family: "Inter", sans-serif, "Times New Roman";
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+}
+
+/*  ---break---  */
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+}
+
+/*  ---break---  */
+
+@theme inline {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@theme {
+    /*  colors  */
+    --color-hospital-logo: #003A96;
+    --color-hospital-darkblue: #072e57;
+    --color-hospital-darkerblue: #14568c;
+    --color-hospital-skycyan: #a7d8ec;
+    --color-hospital-blue: #4d7aba;
+    --color-hospital-blue-sonner-transparent: rgba(77, 122, 186, 0.5);
+    --color-hospital-lightblue: #79a3df;
+    --color-hospital-skyblue: #d8e1f0;
+    --color-hospital-gray: #dadada;
+    --color-hospital-lightgray: #f2f2f2;
+    --color-hospital-yellow: #f6bd38;
+    --color-hospital-darkyellow: #c88c00;
+    --color-hospital-lightyellow: #fff3b0;
+    --color-hospital-turquoise: #3c9ca6;
+    --color-hospital-lightturquoise: #6ec6cf;
+    --color-hospital-lightestturquoise: #ade7ed;
+    --color-hospital-darkturquoise: #1e737c;
+    /*  fonts  */
+    --font-open-sans: "Open Sans", sans-serif;
+    --font-inter: "Inter", sans-serif;
+}
+
+@custom-variant interaction (&:hover, &:focus, &:active, &:focus-visible);
+
+/*  ---break---  */
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    h1 {
+        font-family: "Cal Sans", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        @apply text-5xl text-hospital-darkblue text-center p-10 font-bold;
+    }
+
+    h2, h3, h4, h5, h6 {
+        font-family: "Cal Sans", sans-serif;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes pulse-scale {
+    0%,
+    100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.055);
+    }
+}
+
+@keyframes pulse-scale-xl {
+    0%,
+    100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+@layer utilities {
+    .animate-shimmer-darkblue {
+        animation: shimmer 2.5s infinite;
+        /* example styling to see the effect */
+        background: linear-gradient(to right, #4d7aba 0%, #325f9f 20%, #325f9f 40%, #4d7aba 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-shimmer-lightblue {
+        animation: shimmer 2.5s infinite;
+        /* example styling to see the effect */
+        background: linear-gradient(to right, rgba(79, 129, 199, 0.6) 0%, rgba(79, 129, 199, 0.4) 50%, rgba(79, 129, 199, 0.6) 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-shimmer-gray {
+        animation: shimmer 2.5s infinite;
+        /* example styling to see the effect */
+        background: linear-gradient(to right, #ffffff 0%, #e3e3e3 20%, #e3e3e3 40%, #ffffff 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-pulse-yellow {
+        animation: pulse-scale 1s ease-in-out infinite,
+        shimmer 2.5s infinite;
+        background: #fff3b0;
+        background: linear-gradient(to right, #fff3b0 0%, #fff3b0 20%, #fff6c6 40%, #fff6c6 100%);
+    }
+
+    .animate-pulse-yellow-gradient {
+        animation: pulse-scale 1s ease-in-out infinite,
+        shimmer 2.5s infinite;
+        background: linear-gradient(to right, #f6bd38 0%, #fbdf26 20%, #fbdf26 40%, #f6bd38 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-pulse-green-gradient {
+        animation: pulse-scale 1s ease-in-out infinite,
+        shimmer 2.5s infinite;
+        background: linear-gradient(to right, #497d00 0%, #5f9c0a 20%, #5f9c0a 40%, #497d00 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-pulse-red-gradient {
+        animation: pulse-scale 1s ease-in-out infinite,
+        shimmer 2.5s infinite;
+        background: linear-gradient(to right, #c10007 0%, #f43038 20%, #f43038 40%, #c10007 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-pulse-blue-gradient {
+        animation: pulse-scale 1s ease-in-out infinite,
+        shimmer 2.5s infinite;
+        background: linear-gradient(to right, #4d7aba 0%, #6a99dd 20%, #6a99dd 40%, #4d7aba 100%);
+        background-size: 200% 100%;
+    }
+
+    .animate-pulse-scale {
+        animation: pulse-scale 1s ease-in-out infinite;
+    }
+
+    .animate-pulse-scale-xl {
+        animation: pulse-scale-xl 1s ease-in-out infinite;
+    }
+}
+
+.panel {
+    @apply border border-hospital-blue bg-hospital-blue/10 rounded-3xl backdrop-blur-[10px] transition duration-100 outline-0;
+}
+
+.panel-interactive {
+    @apply border border-hospital-blue bg-white/40 dark:bg-white/20 rounded-3xl backdrop-blur-[10px] transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/30 cursor-pointer
+}
+
+.panel-clear-interactive {
+    @apply border border-transparent bg-transparent rounded-3xl transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/10 cursor-pointer
+}
+
+.panel-clear-inline-interactive {
+    @apply transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/10 cursor-pointer
+}
+
+.panel-inline {
+    @apply bg-hospital-blue/10 backdrop-blur-[10px] transition duration-100 outline-0;
+}
+
+.panel-inline-interactive {
+    @apply bg-hospital-blue/10 backdrop-blur-[10px] transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/30 cursor-pointer
+}
+
+.panel-2 {
+    @apply border-hospital-darkblue bg-hospital-skyblue/80 rounded-3xl backdrop-blur-[10px] transition duration-100 outline-0;
+}
+
+.panel-3 {
+    @apply border border-hospital-darkblue bg-hospital-skyblue/80 rounded-3xl backdrop-blur-[10px] transition duration-100 outline-0;
+}
+
+.panel-title {
+    @apply text-3xl text-[unset] text-left p-4 font-bold;
+}
+
+.panel-input {
+    @apply border bg-white/40 dark:bg-white/20 backdrop-blur-[10px] border-hospital-blue ring-transparent transition interaction:bg-hospital-blue/20 cursor-pointer
+}
+
+.panel-white {
+    @apply bg-white/10 backdrop-blur-[10px] outline-0 dark:bg-hospital-blue/30;
+}
+
+.panel-unrounded {
+    @apply bg-hospital-blue/10 backdrop-blur-[10px] outline-0 dark:bg-hospital-blue/5;
+}
+
+.panel-darker {
+    @apply bg-hospital-blue/15 backdrop-blur-[10px] outline-0;
+}
+
+.panel-interactive-submit {
+    @apply border border-hospital-blue bg-hospital-darkerblue/20 backdrop-blur-[10px] transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/10 cursor-pointer dark:bg-hospital-blue/20;
+}
+
+@custom-variant form-item (& [data-slot="form-item"]);
+@custom-variant form-label (& [data-slot="form-label"]);
+
+.servicereqs-item {
+    @apply gap-0;
+}
+
+.servicereqs-label {
+    @apply flex flex-row gap-0 items-end;
+    @apply text-lg pb-2;
+    @apply cursor-pointer;
+    @apply w-[32rem];
+    color: unset;
+}
+
+.servicereqs-interactive-element {
+    @apply w-[32rem];
+}
+
+.servicereqs-input {
+    @apply border border-hospital-blue bg-hospital-blue/10 backdrop-blur-[10px];
+    @apply cursor-text outline-0 ring-0;
+    @apply transition duration-100;
+    @apply interaction:bg-hospital-blue/30;
+}
+
+.servicereqs-message {
+    @apply truncate text-xs;
+}
+
+.panel-interactive-home {
+    @apply border border-hospital-blue bg-white/40 rounded-3xl backdrop-blur-[10px] transition duration-100 outline-0;
+    @apply interaction:bg-hospital-blue/30 cursor-pointer
+}

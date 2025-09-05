@@ -1,0 +1,22 @@
+meta {
+  name: hospital check
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:3000/node2data
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "ID": 1,
+      "Latitude": 42.09160243516948,
+      "Longitude": -71.26628149240888,
+      "Neighbors": "2"
+    }
+  ]
+}
